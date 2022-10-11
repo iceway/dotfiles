@@ -1,0 +1,41 @@
+[core]
+	editor = vim
+	whitespace = trailing-space,space-before-tab
+	excludesfile = ~/.gitignore_global
+	quotepath = false
+	autocrlf = false
+[alias]
+	logp = log --pretty=oneline --graph --decorate=full
+	logt = log --pretty=oneline --graph --topo-order
+	logd = log --pretty=oneline --graph --date-order
+	loga = log --oneline --decorate=full
+	find-file = "!for br in $(git for-each-ref --format=\"%(refname)\" refs/heads); do echo \"${br}:\"; git ls-tree -r --name-only --full-name $br | nl -bn -w3 | egrep \"$1\" ; done; :"
+	find-file-in-ref = "!echo \"${2:-HEAD}:\"; git ls-tree -r --name-only --full-name ${2:-HEAD} | nl -bn -w3 | egrep \"$1\"; :"
+[format]
+	pretty = fuller
+[gui]
+	commitmsgwidth = 0
+[merge]
+	log = true
+	tool = vimdiff
+[commit]
+	template = ~/.gitmessage
+[tig]
+	line-graphics = "UTF-8"
+	main-view = date:default author:full id:yes,color commit-title:graph=yes,refs=yes,overflow=no
+	blame-view = date:default author:full file-name:auto id:yes,color line-number:yes,interval=5 text
+	vertical-split = no
+[tig "bind"]
+	generic = g none
+	main = C !git cherry-pick -xs %(commit)
+	main = B ?git rebase -i %(commit)
+	main = R ?git revert %(commit)
+	main = M ?git revert -m %(prompt Enter parent number 1 or 2: ) %(commit)
+[user]
+	email = iceway.zhang@gmail.com
+	name = Iceway Zhang
+[http]
+	sslVerify = false
+[oh-my-zsh]
+	hide-dirty = 1
+	hide-status = 1

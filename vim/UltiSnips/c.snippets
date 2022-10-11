@@ -1,0 +1,56 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+snippet testcode "a test code set" b
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[])
+{
+	${VISUAL}$0
+
+	return 0;
+}
+endsnippet
+
+snippet struct "define a new struct" b
+struct _$1 {
+	$2;
+};
+typedef struct _$1 ${1:STRUCT_NAME};
+${VISUAL}$0
+endsnippet
+
+snippet Struct "define a new struct with next" b
+struct _$1 {
+	struct _$1 *next;
+	$2;
+};
+typedef struct _$1 ${1:STRUCT_NAME};
+${VISUAL}$0
+endsnippet
+
+snippet dnilicense "insert DNI license template" b
+/*
+ * Copyright (c) ${1:2020} Delta, Inc.
+ * All Rights Reserved.
+ * Delta Group Confidential and Proprietary.
+ *
+ * The source codes and binary files in this module is proprietary of Delta.
+ * It's strictly forbidden to distribute or use the source code out of Delta.
+ *
+ * @Author: ${2}
+ */
+${VISUAL}$0
+endsnippet
+
+snippet sectionline "comment line to split sections" b
+/*** ~~~~~~~~~~~~ START: ${1} ~~~~~~~~~~~~ ***/
+${VISUAL}$0
+/*** ~~~~~~~~~~~~ END:   ${1} ~~~~~~~~~~~~ ***/
+endsnippet
+
+# vim:ft=snippets:

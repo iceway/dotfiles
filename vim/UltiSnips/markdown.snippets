@@ -1,0 +1,28 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+snippet meta "post metas" b
+---
+layout: ${1:post}
+title:  ${2:title}
+date: `!v strftime("%c")`
+categories: ${3:category}
+tags: ${4:tag}
+---
+${0}
+endsnippet
+
+snippet dnilicense "insert DNI license template" b
+**
+Copyright (c) ${1:2020} Delta, Inc.
+All Rights Reserved.
+Delta Group Confidential and Proprietary.
+
+The source codes and binary files in this module is proprietary of Delta.
+It's strictly forbidden to distribute or use the source code out of Delta.
+**
+
+${VISUAL}$0
+endsnippet
+# vim:ft=snippets:

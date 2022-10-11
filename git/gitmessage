@@ -1,0 +1,51 @@
+# @Part 1 (head)
+# ==============
+# Required, must be first line of commit message, format as:
+# [<branch>] {<project>} <type> (<scope>): <subject>
+#     <type>: should be one of below type:
+#             feat      A new feature.
+#             fix       A buf fixing.
+#             docs      Documentation only changes.
+#             style     Changes that do not affect the meaning of the code
+#                       (white-space, formatting, missing semi-colons, comments, etc.)
+#             refactor  A code change that neither fixes a bug or adds a feature.
+#             test      Adding missing tests.
+#             chore     Changes to the build process or auxiliary tools.
+#             revert    Revert one submitted commit.
+#     <scope>: optionally, but for feat and fix type, must fill in bug number on
+#         bugzilla or jira in this field.
+#     <subject>: start with verb (such as 'change'), (50~72) characters line.
+#
+# @Part 2 (body)
+# ==============
+# Required, several items to describes (recommend start with *).
+# * <BREAKING CHANGE>: <description>.
+#   if BREAKING CHANGE exists, it must be indicated at the very beginning of body.
+#   otherwise, please ignore this item.
+# * <Requirement>：Why was this change necessary (spec or mail for feat)?
+# * <Issue>: How does it address the problem?
+# * <Cause>: Why this issue appears?
+# * <Solution>: How to fix the issue?
+# * Are there any side effects?
+#
+# @Part 3 (footer)
+# ================
+# Optional, several items to describes (recommend start with -).
+# - include a link to the ticket, if any.
+# - other information about this change, and etc.
+#
+#
+# for example:
+#   {XR500} fix (bug#12345): don't disable 443 ports by default.
+#
+#   * Cause: customer report a bug that could not access https url.
+#   * Reproduce:
+#     1. reset DUT to default.
+#     2. wait for reboot finished, access a https site in browser on LAN device.
+#     3. you should find that could not open the site.
+#   * Solution: remove the old code to disable 443 port by default.
+#
+#   - customer's requirement: http://nosite.org/requirements/12345.html
+#   - have tested on project XR500 and confirmed by customer.
+#
+#   Signed-off-by: Coder <coder@mail.org>
