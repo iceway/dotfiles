@@ -68,3 +68,5 @@ unset NORMAL
 
 # 把Ctrl和Capslock按键的作用互换
 # setxkbmap -option ctrl:swapcaps
+
+source ~/.shell_aliases

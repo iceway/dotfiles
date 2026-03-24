@@ -2,7 +2,7 @@
 
 " @@@ VIM 配置（终端环境） @@@
 " Author: Iceway Zhang
-" Updated: 2021/06/08
+" Updated: 2024/04/07
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -125,7 +125,6 @@ runtime! ftplugin/man.vim
 
 " 配色方案配置(如果终端不支持斜体字显示，将下面两行注释)
 let g:monokai_term_italic = 1
-let g:gruvbox_italic = 1
 
 " vim-airline配置
 set laststatus=2
@@ -138,23 +137,23 @@ let g:UltiSnipsJumpForwardTrigger = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 
 " YouCompleteMe配置
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_use_clangd = 1
-let g:ycm_clangd_binary_path = "~/.vim/plugs/YouCompleteMe/third_party/ycmd/third_party/clangd/output/bin/clangd"
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_collect_identifier_from_comments_and_strings = 0
-let g:ycm_complete_in_strings = 1
-let g:ycm_complete_in_comments = 1
-set completeopt=menu,menuone
-let g:ycm_semantic_triggers = {
-            \ 'c,cpp,python,java,go': ['re!\w{2}'],
-            \ 'cs,lua,javascript,sh': ['re!\w{2}']
-            \ }
-let g:ycm_filetype_whitelist = {
-            \ "c":1, "cpp":1, "h":1, "sh":1, "zsh":1,
-            \ "python":1, "vim":1, "go":1, "javascript":1, "lua":1
-            \ }
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+" let g:ycm_use_clangd = 1
+" let g:ycm_clangd_binary_path = "~/.vim/plugs/YouCompleteMe/third_party/ycmd/third_party/clangd/output/bin/clangd"
+" let g:ycm_show_diagnostics_ui = 0
+" let g:ycm_confirm_extra_conf = 0
+" let g:ycm_collect_identifier_from_comments_and_strings = 0
+" let g:ycm_complete_in_strings = 1
+" let g:ycm_complete_in_comments = 1
+" set completeopt=menu,menuone
+" let g:ycm_semantic_triggers = {
+"             \ 'c,cpp,python,java,go': ['re!\w{2}'],
+"             \ 'cs,lua,javascript,sh': ['re!\w{2}']
+"             \ }
+" let g:ycm_filetype_whitelist = {
+"             \ "c":1, "cpp":1, "h":1, "sh":1, "zsh":1,
+"             \ "python":1, "vim":1, "go":1, "javascript":1, "lua":1
+"             \ }
 
 " ale配置
 let g:ale_sign_error = '✗'
@@ -240,12 +239,11 @@ endif
 call plug#begin('~/.vim/plugs')
 
 Plug 'crusoexia/vim-monokai'          " 配色方案monokai
-Plug 'morhetz/gruvbox'                " 配色方案gruvbox
 Plug 'vim-airline/vim-airline'        " 状态栏样式和配色
 Plug 'vim-airline/vim-airline-themes' " 提供大量vim-airline配色方案
 Plug 'SirVer/ultisnips'               " 代码块补全引擎
 Plug 'honza/vim-snippets'             " 提供大量适用于ultisnips的代码块
-Plug 'Valloric/YouCompleteMe'         " 基于语义的代码自动补全
+"Plug 'Valloric/YouCompleteMe'         " 基于语义的代码自动补全
 Plug 'dense-analysis/ale'             " 各文件类型的语法实时检查
 Plug 'Chiel92/vim-autoformat'         " 自动格式化代码
 Plug 'easymotion/vim-easymotion'      " 快速移动
