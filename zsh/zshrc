@@ -71,9 +71,30 @@ plugins=(
   command-not-found
   zsh-autosuggestions
   zsh-syntax-highlighting
+  zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# 设置历史记录文件路径（默认：~/.zsh_history）
+HISTFILE=~/.zsh_history
+
+# 内存中保存的历史记录数量（默认：10000）
+HISTSIZE=10000
+
+# 历史文件保存的历史记录数量（默认：10000）
+SAVEHIST=10000
+
+# 可选：忽略重复命令（相同命令连续执行时仅记录一次）
+setopt HIST_IGNORE_DUPS
+
+# 可选：实时追加历史记录（无需等会话结束）
+setopt INC_APPEND_HISTORY
+
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
 
 # User configuration
 
