@@ -36,8 +36,30 @@ print_log() {
 }
 
 apt_install_pkgs() {
-	print_log green ">>> apt install $*"
-	$SUDO apt -qq -y install "$@"
+	local to_install=()
+	for pkg in "$@"; do
+		if ! dpkg -s "$pkg" &>/dev/null; then
+			to_install+=("$pkg")
+		fi
+	done
+	if [ ${#to_install[@]} -gt 0 ]; then
+		print_log green ">>> apt install ${to_install[*]}"
+		$SUDO apt -qq -y install "${to_install[@]}"
+	fi
+}
+
+pip_install_pkg() {
+	if ! pip show "$@" &>/dev/null; then
+		print_log green ">>> ++ pip install $*"
+		pip install "$@"
+	fi
+}
+
+npm_install_pkg() {
+	if ! npm list -g "$@" &>/dev/null; then
+		print_log green ">>> ++ npm install $*"
+		$SUDO npm install -g "$@"
+	fi
 }
 
 # $1: target
@@ -145,20 +167,18 @@ install_extra() {
 		pip config set global.index-url "https://mirror.sjtu.edu.cn/pypi/web/simple"
 		pip config set install.trusted-host "mirror.sjtu.edu.cn"
 	fi
-	if ! command -v black >/dev/null 2>&1; then
-		if ! pip3 install "black"; then
-			apt_install_pkgs black
-		fi
-	fi
+	pip_install_pkg black
 
 	### nodejs
+	if [[ ! -s "/etc/apt/sources.list.d/nodesource.sources" ]]; then
+		curl -fsSL "https://deb.nodesource.com/setup_lts.x" | $SUDO bash -
+		$SUDO apt update
+	fi
 	apt_install_pkgs nodejs
-	if ! command -v prettier >/dev/null 2>&1; then
-		$SUDO npm install --unsafe-perm -g prettier
-	fi
-	if ! command -v stylus >/dev/null 2>&1; then
-		$SUDO npm install --unsafe-perm -g stylus
-	fi
+	# npm config set prefix "$HOME/.npm"
+	# npm config set cache "$HOME/.npm"
+	npm_install_pkg prettier
+	npm_install_pkg stylus
 
 	### zsh
 	curl_get_file "$HOME/.bashrc" "$GITHUBRAW/iceway/dotfiles/master/bash/bashrc"
@@ -188,7 +208,7 @@ EOF
 	git_clone_repo "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" "$GITHUB/zsh-users/zsh-autosuggestions"
 	git_clone_repo "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" "$GITHUB/zsh-users/zsh-syntax-highlighting"
 	git_clone_repo "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search" "$GITHUB/zsh-users/zsh-history-substring-search"
-	if ! grep -qE "^$USER.*$(which zsh)$" /etc/passwd; then
+	if ! grep -qE "^$USER"'.*/usr/bin/zsh$' /etc/passwd; then
 		chsh -s "$(which zsh)" "$USER"
 	fi
 }
