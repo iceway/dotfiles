@@ -228,14 +228,17 @@ install_opencode() {
 	mkdir -p "$opencode_skill_dir"
 	mkdir -p "$opencode_plugin_dir"
 	git_clone_repo "$opencode_repo_dir/anthropics-skills.git" "$GITHUB/anthropics/skills"
-	find "$opencode_repo_dir/anthropics-skills.git/skills" -mindepth 1 -maxdepth 1 -type d | while read -r x; do
-		ln -sf "$x" "$opencode_skill_dir/$(basename "$x")"
-	done
+	ln -sf "$opencode_repo_dir/anthropics-skills.git/skills" "$opencode_skill_dir/anthropics-skills"
+	# find "$opencode_repo_dir/anthropics-skills.git/skills" -mindepth 1 -maxdepth 1 -type d | while read -r x; do
+	# 	ln -sf "$x" "$opencode_skill_dir/$(basename "$x")"
+	# done
 	git_clone_repo "$opencode_repo_dir/obra-superpowers.git" "$GITHUB/obra/superpowers"
-	find "$opencode_repo_dir/obra-superpowers.git/skills" -mindepth 1 -maxdepth 1 -type d | while read -r x; do
-		ln -sf "$x" "$opencode_skill_dir/$(basename "$x")"
-	done
+	# find "$opencode_repo_dir/obra-superpowers.git/skills" -mindepth 1 -maxdepth 1 -type d | while read -r x; do
+	# 	ln -sf "$x" "$opencode_skill_dir/$(basename "$x")"
+	# done
+	ln -sf "$opencode_repo_dir/obra-superpowers.git/skills" "$opencode_skill_dir/superpower-skills"
 	ln -sf "$opencode_repo_dir/obra-superpowers.git/.opencode/plugins/superpowers.js" "$opencode_plugin_dir/superpowers.js"
+	jq '.plugin += ["@tarquinen/opencode-dcp@latest"]' "$HOME/.config/opencode/opencode.json"
 }
 
 case "$1" in
